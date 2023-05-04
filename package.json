@@ -5,6 +5,7 @@
   "version": "2.3.1",
   "private": false,
   "scripts": {
+    "install-deps": "npm install",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:npm": "rollup --config build/rollup.config.js && npm run cssmin",
