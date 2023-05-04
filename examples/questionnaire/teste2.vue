@@ -1,73 +1,43 @@
 
 <template>
-    <flow-form v-bind:progressbar="false" v-bind:navigation="false" v-bind:questions="questions" v-bind:language="language">
+    <flow-form>
+        <question id="a1b" required="true" placeholder="Por favor digite o seu nome" type="text" title="Qual seu nome?"
+            v-model="name">
+        </question>
+        <question id="f4g" required="true" placeholder="Por favor digite o seu email" type="email"
+            :title="'Qual seu email ' + name + '?'" v-model="email">
+        </question>
+        <question id="g9p" required="true" mask='(###) ###-######' placeholder="Por favor digite o seu telefone"
+            type="phone" :title="name + ' Qual seu telefone? '" v-model="phone">
+        </question>
 
-        <template v-slot:completeButton>
-            <div class="f-submit">
-                <p v-if="submitted">{{ language.successText }}</p>
 
-                <div v-else>
-                    <button v-if="!loading" class="o-btn-action" ref="button" type="submit" href="#"
-                        v-on:click.prevent="onSendData()" aria-label="Press to submit">
-                        <span>{{ language.submitText }}</span>
-                    </button>
-                </div>
-                <progress-bar :duration="tempoTotal" v-if="loading" />
-            </div>
-        </template>
     </flow-form>
 </template>
-
-
+  
 <script>
-import ProgressBar from '../../src/components/ProgressBar.vue'
-import FlowForm from '../../src/components/FlowForm.vue'
-import QuestionModel, { QuestionType } from '../../src/models/QuestionModel'
-import LanguageModel from '../../src/models/LanguageModel'
-
-let tempoTotal = 5000
+import { ref } from 'vue';
+import FlowForm from '../../src/components/FlowForm.vue';
+import Question from '../../src/components/Question.vue'
+const name = ref('')
+const email = ref('')
+const phone = ref('')
 
 export default {
     name: 'testeComponent',
     components: {
         FlowForm,
-        ProgressBar
-
+        Question
     },
     data() {
-
         return {
-            submitted: false,
-            loading: false,
-            tempoTotal,
-            language: new LanguageModel({
-            }),
-            questions: [
-                // QuestionModel array
-                new QuestionModel({
-                    title: 'Escolha os arquivos',
-                    type: QuestionType.File,
-                    multiple: true,
-                    required: true
-
-                })
-            ],
-        }
-    },
-    methods: {
-        onSendData() {
-            console.log("clicou")
-            this.loading = true
-            setTimeout(() => {
-                this.submitted = true
-            }, tempoTotal);
-
-
+            name,
+            email,
+            phone
         }
 
     }
 }
-
 </script>
 <style lang="css">
 @import '../../src/assets/css/themes/theme-minimal.css';
