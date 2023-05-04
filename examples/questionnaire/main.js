@@ -5,6 +5,6 @@
 */
 
 import { createApp } from 'vue'
-import Example from './Example.vue'
+import teste2 from './teste2.vue'
 
-createApp(Example).mount('#app')
+createApp(teste2).mount('#app')
